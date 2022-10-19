@@ -1,10 +1,10 @@
+import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./style.scss";
 import myblog from "../../model/blogModel";
-import { Typography } from "@mui/material";
-import CommentList from "../CommentList";
 import Comment from "../Comment";
+import CommentList from "../CommentList";
+import "./style.scss";
 
 function FormItem(props) {
   const { id } = useParams();

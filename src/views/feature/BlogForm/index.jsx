@@ -1,10 +1,10 @@
-import React from 'react';
-import FormItem from '../BlogView';
-import {useForm} from 'react-hook-form';
-import myblog from '../../model/blogModel';
-import InputField from '../../components/Form/InputFields';
 import { Button } from '@mui/material';
-import {Link, Navigate, useNavigate} from 'react-router-dom';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import InputField from '../../components/Form/InputFields';
+import MultiField from '../../components/Form/MultiplyFields';
+import myblog from '../../model/blogModel';
 function BlogForm(props) {
     const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ function BlogForm(props) {
         }} >
             <form onSubmit={form.handleSubmit(handleSubmit)}>
                 <InputField name='title' label='Tieu de blog' form={form}/>
-                <InputField name='content' label='Noi dung blog' form={form}/>
+                <MultiField name='content' label='Noi dung blog' form={form}/>
                 <Button variant='contained' 
                 color='primary' 
                 fullWidth sx={{m:'20px 0px 2px 0px'}} 
