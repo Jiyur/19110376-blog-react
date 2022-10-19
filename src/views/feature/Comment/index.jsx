@@ -1,16 +1,16 @@
-import React from 'react';
-import CommentForm from '../CommentForm';
+import React from "react";
+import CommentForm from "../CommentForm";
 
-
-function Comment(props) {
-    const handleSubmit=(values)=>{
-        console.log('Submit :'+ values);
-    }
-    return (
-        <div>
-            <CommentForm onSubmit={handleSubmit} />
-        </div>
-    );
-}
+const Comment = ({ onSubmit }) => {
+  const handleSubmit = (values) => {
+    onSubmit();
+    console.log("Submit :" + values);
+  };
+  return (
+    <div>
+      <CommentForm onSubmit={(date) => handleSubmit(date)} />
+    </div>
+  );
+};
 
 export default Comment;

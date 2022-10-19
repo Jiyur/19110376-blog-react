@@ -1,27 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BlogList from "./BlogList";
-import { Button } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import { Fab } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+
 import myblog from "../model/blogModel";
+import {Link} from 'react-router-dom';
 function BlogFeater(props) {
-  const list = [...myblog
+  const [blogList, setBlogList] = useState([]);
+  const [isDelete, setIsDelete] = useState(false);
   
-  ];
+  useEffect(() => {
+    handleGetData();
+  }, [isDelete]);
+  const handleGetData=()=>{
+
+    setBlogList(myblog)
+    
+  }
+  const myLink = (props) => <Link to="/add" {...props} />;
   return (
     <div>
-      <BlogList blogList={list} />
+      <div style={{
+        display:'flex',
+        flexDirection:'row',
+        flexWrap:'wrap',
+      }}>
+      <BlogList blogList={blogList} onDelete={()=>{
+        console.log(isDelete)
+        setIsDelete(!isDelete)
+      }} />
+
+      </div>
       <div 
        style={{
-        position: 'absolute', 
-        left: '50%', 
-        top: '50%',
-        transform: 'translate(-50%, -50%)'
+        display: 'flex',
+          justifyContent: 'center',
+          alignContent: 'center',
+          flexDirection: 'column',
     }}
       >
-        <h3>Click here to add new blog</h3>
-        <Button variant="contained" endIcon={<SendIcon />} sx={{left:'35%'}}>
-          Add
-        </Button>
+        <h3 style={{alignSelf:'center'}}>Click here to add new blog</h3>
+       
+        <Fab color="primary" aria-label="add" style={{
+          alignSelf: 'center',
+        }}
+        component={myLink}>
+          <AddIcon/>
+          </Fab> 
+        
       </div>
     </div>
   );

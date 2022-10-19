@@ -6,7 +6,7 @@ import "./style.scss";
 import myblog from "../../model/blogModel";
 import { useParams } from "react-router-dom";
 
-function CommentForm(props) {
+function CommentForm({ onSubmit }) {
   const { id } = useParams();
   const form = useForm({
     defaultValues: {
@@ -14,25 +14,28 @@ function CommentForm(props) {
     },
   });
   const handleSubmit = (values) => {
-    const { onSubmit } = props;
     console.log(values.content);
-    if (onSubmit) {
+
+    if (values.content) {
       let index = myblog.findIndex((item) => item.id == id);
-      let blog=myblog.find((item) => item.id == id);
+      let blog = myblog.find((item) => item.id == id);
+      if (myblog[index].commentList == undefined) {
+        myblog[index].commentList = [];
+      }
       let data = {
-        id:blog.commentList.length+1,
+        id: blog.commentList.length + 1,
         content: values.content,
       };
 
       myblog[index].commentList.push(data);
-      console.log(myblog[index].commentList);
+      onSubmit();
     }
     form.reset();
   };
   return (
     <div>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <InputField name="content" label="Content" form={form} />
+        <InputField name="content" label="Comment here" form={form} />
         <Button
           variant="contained"
           color="primary"
